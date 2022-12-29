@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User_Save</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form action="/user/save" method="post" name="userSaveForm" enctype="multipart/form-data">
+        <label for="userName">아이디</label>
+        <input type="text" name="userName" id="userName" class="form-control" onblur="nameCheck()">
+        <span id="name_inner"></span>
+        <br>
+
+        <label for="userPassword">비밀번호</label>
+        <input type="password" name="userPassword" id="userPassword" class="form-control" onblur="passCheck()">
+        <span id="pass_inner"></span>
+        <br>
+
+        <label for="userMobile">전화번호</label>
+        <input type="text" name="userMobile" id="userMobile" class="form-control" onblur="mobileCheck()">
+        <span id="mobile_inner"></span>
+        <br>
+
+        <label for="userProfile">프로필사진</label>
+        <input type="file" name="userProfile" id="userProfile" class="form-control">
+
+        <div>
+            <input type="button" value="가입" onclick="userSave()" class="btn">
+        </div>
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    const checkExpMobile = /^\d{3}-\d{4}-\d{4}$/;
+    const checkExpPW = /^[a-zA-Z\d-_!#]{1,30}$/;
+    const inner = document.getElementById("name_inner");
+
+    const userSave = () => {
+        const check = "이미 사용중인 아이디 입니다.";
+        const pw_regular = document.getElementById("userPassword").value;
+        const mob_regular = document.getElementById("userMobile").value;
+
+        if (pw_regular.match(checkExpPW) && mob_regular.match(checkExpMobile) && !check) {
+            document.userSaveForm.submit()
+        } else if (check) {
+            alert("중복된 아이디로는 가입할 수 없습니다!");
+            return false;
+        } else if (!pw_regular.match(checkExpPW) || !mob_regular.match(checkExpMobile)) {
+            alert("가입정보를 확인하세요!");
+            return false;
+        }
+    }
+
+    const nameCheck = () => {
+        const inputName = document.getElementById("userName").value;
+        const result = document.getElementById("name_inner");
+
+        axios({
+            method: "post",
+            url: "/user/save/nameCheck",
+            params: {
+                inputName : inputName
+            }
+        }).then(res => {
+            if (inputName.length == 0) {
+                result.innerHTML = "";
+            } else if (inputName.length > 0 && res) {
+                result.innerHTML = "사용할 수 있는 아이디 입니다.";
+                result.style.color = "green";
+            }
+        }).catch(err => {
+            if (inputName.length == 0) {
+                result.innerHTML = "";
+            } else if (inputName.length > 0 && err) {
+                result.innerHTML = "이미 사용중인 아이디 입니다.";
+                result.style.color = "red";
+            }
+        })
+
+    }
+
+    const passCheck = () => {
+        const inputPassword = document.getElementById("userPassword").value;
+        const result = document.getElementById("pass_inner");
+
+        if (!inputPassword.match(checkExpPW) && inputPassword.length != 0) {
+            result.innerHTML = "특수문자는 -, _, !, #만 사용 가능하며, 최대 30자까지 입력할 수 있습니다.";
+            result.style.color = "red";
+            return false;
+        } else if (inputPassword.length == 0) {
+            result.innerHTML = "";
+        } else {
+            result.innerHTML = "사용할 수 있는 비밀번호 입니다.";
+            result.style.color = "green";
+        }
+
+    }
+
+    const mobileCheck = () => {
+        const inputMobile = document.getElementById("userMobile").value;
+        const result = document.getElementById("mobile_inner");
+
+        if (!inputMobile.match(checkExpMobile) && inputMobile.length != 0) {
+            result.innerHTML = "'-' 까지 정확하게 입력해 주시기 바랍니다.";
+            result.style.color = "red";
+            return false;
+        } else if (inputMobile.length == 0) {
+            result.innerHTML = "";
+        } else {
+            result.innerHTML = "확인 되었습니다.";
+            result.style.color = "green";
+        }
+
+    }
+</script>
+</html>

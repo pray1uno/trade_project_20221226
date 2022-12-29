@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User_Login</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <input type="button" onclick="toMain1()" value="메인으로" class="btn">
+    </div>
+
+    <form action="/user/login" method="post" name="userLoginForm">
+        <input type="email" name="userName" id="userName" class="form-control" placeholder="아이디">
+        <input type="password" name="userPassword" id="userPassword" class="form-control" placeholder="비밀번호">
+    </form>
+
+    <div>
+        <input type="button" value="로그인" onclick="userLogin()" class="btn">
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const userLogin = () => {
+        document.userLoginForm.submit();
+
+    }
+
+    const toMain1 = () => {
+        location.href = "/";
+
+    }
+</script>
+</html>

@@ -7,9 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @Setter
 @ToString
@@ -37,19 +34,13 @@ public class UserDTO {
         if (userEntity.getFileAttached().equals("Y")) {
             userDTO.setFileAttached(userEntity.getFileAttached());
 
-            List<String> originalFileNameList = new ArrayList<>();
-            List<String> storedFileNameList = new ArrayList<>();
-
-            for (UserProfileEntity userProfileEntity : userEntity.getUserProfileEntityList()) {
-                originalFileNameList.add(userProfileEntity.getOriginalFileName());
-                storedFileNameList.add(userProfileEntity.getStoredFileName());
-            }
-
-            userDTO.setOriginalFileName(originalFileNameList.toString());
-            userDTO.setStoredFileName(storedFileNameList.toString());
+            userDTO.setOriginalFileName(userEntity.getUserProfileEntityList().get(0).getOriginalFileName());
+            userDTO.setStoredFileName(userEntity.getUserProfileEntityList().get(0).getStoredFileName());
 
         } else {
             userDTO.setFileAttached(userEntity.getFileAttached());
+            userDTO.setStoredFileName("noimg.gif");
+
         }
 
         return userDTO;

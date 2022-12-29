@@ -1,6 +1,7 @@
 package com.its.trade.entity;
 
 import com.its.trade.DTO.UserDTO;
+import com.its.trade.repository.UserProfileRepository;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,5 +35,4 @@ public class UserProfileEntity {
 
         return userProfileEntity;
     }
-
 }

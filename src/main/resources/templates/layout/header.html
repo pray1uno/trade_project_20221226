@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="header">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #nav_manu ul {
+            list-style-type: none;
+        }
+
+        #nav_manu ul li {
+            display: inline;
+        }
+    </style>
+    <body>
+    <div class="container" id="nav_manu">
+        <header class="justify-content-center">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">메인</a></li>
+                <li class="nav-item"><a href="/user/save" class="nav-link">회원가입</a></li>
+                <li class="nav-item" th:if="${session.login == null}"><a href="/user/login" class="nav-link">로그인</a></li>
+                <li class="nav-item" th:if="${session.login != null}"><a href="/user/logout" class="nav-link">로그아웃</a></li>
+            </ul>
+        </header>
+    </div>
+    </body>
+</th:block>
+</html>
