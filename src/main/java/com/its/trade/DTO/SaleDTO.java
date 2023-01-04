@@ -18,7 +18,7 @@ public class SaleDTO {
     private Long id;
     private String itemCategory;
     private String itemName;
-    private int itemPrice;
+    private String itemPrice;
     private int itemCount;
     private String fileAttached;
     private String sellerName;
@@ -26,9 +26,9 @@ public class SaleDTO {
     private LocalDateTime itemCreatedTime;
     private LocalDateTime itemUpdatedTime;
 
-    private MultipartFile saleFile;
-    private String originalFileName;
-    private String storedFileName;
+    private List<MultipartFile> saleFile;
+    private List<String> originalFileName;
+    private List<String> storedFileName;
 
     public static SaleDTO toSaleDTO(SaleEntity saleEntity) {
         SaleDTO saleDTO = new SaleDTO();
@@ -54,8 +54,11 @@ public class SaleDTO {
                 storedFileNameList.add(saleFileEntity.getStoredFileName());
             }
 
-            saleDTO.setOriginalFileName(originalFileNameList.toString());
-            saleDTO.setStoredFileName(storedFileNameList.toString());
+//            saleDTO.setOriginalFileName(originalFileNameList.toString());
+//            saleDTO.setStoredFileName(storedFileNameList.toString());
+
+            saleDTO.setOriginalFileName(originalFileNameList);
+            saleDTO.setStoredFileName(storedFileNameList);
 
         } else {
             saleDTO.setFileAttached(saleEntity.getFileAttached());

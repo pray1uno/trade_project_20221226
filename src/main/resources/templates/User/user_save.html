@@ -40,7 +40,7 @@
     const inner = document.getElementById("name_inner");
 
     const userSave = () => {
-        const check = "이미 사용중인 아이디 입니다.";
+        const check = inner.innerHTML == "이미 사용중인 아이디 입니다.";
         const pw_regular = document.getElementById("userPassword").value;
         const mob_regular = document.getElementById("userMobile").value;
 

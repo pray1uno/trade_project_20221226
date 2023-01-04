@@ -25,7 +25,7 @@ public class SaleEntity extends BaseEntity{
     private String itemName;
 
     @Column(length = 14)
-    private int itemPrice;
+    private String itemPrice;
 
     @Column(length = 4)
     private int itemCount;
@@ -56,6 +56,7 @@ public class SaleEntity extends BaseEntity{
         saleEntity.setItemPrice(saleDTO.getItemPrice());
         saleEntity.setItemCount(saleDTO.getItemCount());
         saleEntity.setFileAttached("N");
+        saleEntity.setSellerName(saleDTO.getSellerName());
         saleEntity.setItemHits(0);
 
         return saleEntity;
@@ -69,6 +70,7 @@ public class SaleEntity extends BaseEntity{
         saleEntity.setItemPrice(saleDTO.getItemPrice());
         saleEntity.setItemCount(saleDTO.getItemCount());
         saleEntity.setFileAttached("Y");
+        saleEntity.setSellerName(saleDTO.getSellerName());
         saleEntity.setItemHits(0);
 
         return saleEntity;

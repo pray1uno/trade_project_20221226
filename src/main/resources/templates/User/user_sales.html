@@ -50,7 +50,7 @@
             <tr>
                 <th>아이템 이미지</th>
                 <td>
-                    <input type="file" name="sale_file" id="sale_file" class="form-control" multiple>
+                    <input type="file" name="saleFile" id="saleFile" class="form-control" multiple>
                     <!--                    <img id="Preview"> 사용하려면 onchange 속성이 있어야함 -->
                     <ul id="Preview" class="sortable"></ul>
                 </td>
@@ -59,12 +59,22 @@
     </form>
 
     <div style="text-align: center">
-        <button class="btn btn-primary">판매 등록</button>
-        <button class="btn btn-warning">판매 취소</button>
+        <button class="btn btn-primary" onclick="to_sales_upload()">판매 등록</button>
+        <button class="btn btn-warning" onclick="to_sales_cancel()">판매 취소</button>
     </div>
 </div>
 </body>
 <script th:inline="javascript">
+    const to_sales_upload = () => {
+        document.salesUpload.submit();
+
+    }
+
+    const to_sales_cancel = () => {
+        location.href = "/";
+
+    }
+
     const price = document.querySelector('#price');
     price.addEventListener('keyup', function (e) {
         let value = e.target.value;
@@ -95,7 +105,7 @@
     // 다중 이미지파일 업로드 시(삭제 포함)
     $(function () {
         //이미지 등록
-        $("#sale_file").change(function (e) {
+        $("#saleFile").change(function (e) {
             //div 내용 비워주기
             $('#Preview').empty();
 
