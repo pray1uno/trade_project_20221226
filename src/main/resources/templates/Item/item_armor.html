@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item_Armor</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        #armor_box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        #categoryTab a {
+            font-weight: bold;
+            line-height: 40px;
+            text-decoration: none;
+            color: dimgray;
+        }
+
+        #categoryTab li {
+            display: inline-block;
+            padding: 0 40px 0 0;
+        }
+
+        #categoryTab a:after {
+            display: block;
+            content: '';
+            border-bottom: solid 3px black;
+            transform: scaleX(0);
+            transition: transform 250ms ease-in-out;
+        }
+
+        #categoryTab a:hover:after {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container">
+    <div class="container" id="armor_box">
+        <h1>
+            <span>방어구</span>
+        </h1>
+    </div>
+
+    <div id="categoryTab">
+        <ul class="nav justify-content-center">
+            <li>
+                <a href="#">투구</a>
+            </li>
+            <li>
+                <a href="#">상의</a>
+            </li>
+            <li>
+                <a href="#">하의</a>
+            </li>
+            <li>
+                <a href="#">장갑</a>
+            </li>
+            <li>
+                <a href="#">망토</a>
+            </li>
+            <li>
+                <a href="#">신발</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

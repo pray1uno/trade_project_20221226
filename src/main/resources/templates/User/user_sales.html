@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User_Sales</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container">
+    <form action="/sales/upload" method="post" name="salesUpload" enctype="multipart/form-data">
+        <table class="table">
+            <tr>
+                <input type="hidden" th:value="${session.login.userName}" name="sellerName">
+            </tr>
+
+            <tr>
+                <th>카테고리</th>
+                <td>
+                    <select name="itemCategory" class="form-select">
+                        <option value="무기" selected>무기</option>
+                        <option value="방어구">방어구</option>
+                        <option value="장신구">장신구</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>아이템 이름</th>
+                <td>
+                    <input type="text" name="itemName" class="form-control">
+                </td>
+            </tr>
+
+            <tr>
+                <th>수량</th>
+                <td>
+                    <input type="text" name="itemCount" class="form-control" id="count">
+                </td>
+            </tr>
+
+            <tr>
+                <th>가격</th>
+                <td>
+                    <input type="text" name="itemPrice" class="form-control" maxlength="14" id="price">
+                </td>
+            </tr>
+
+            <tr>
+                <th>아이템 이미지</th>
+                <td>
+                    <input type="file" name="sale_file" id="sale_file" class="form-control" multiple>
+                    <!--                    <img id="Preview"> 사용하려면 onchange 속성이 있어야함 -->
+                    <ul id="Preview" class="sortable"></ul>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div style="text-align: center">
+        <button class="btn btn-primary">판매 등록</button>
+        <button class="btn btn-warning">판매 취소</button>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const price = document.querySelector('#price');
+    price.addEventListener('keyup', function (e) {
+        let value = e.target.value;
+        value = Number(value.replaceAll(',', ''));
+
+        if (isNaN(value)) {
+            price.value = "";
+        } else {
+            const formatValue = value.toLocaleString('ko-KR');
+            price.value = formatValue;
+        }
+    })
+
+    // 단일 이미지 업로드 시(onchange)
+    // function readURL(input) {
+    //     if (input.files && input.files[0]) {
+    //         let reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             document.getElementById('Preview').src = e.target.result;
+    //         };
+    //         reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //         document.getElementById('Preview').src = "";
+    //     }
+    // }
+
+
+    // 다중 이미지파일 업로드 시(삭제 포함)
+    $(function () {
+        //이미지 등록
+        $("#sale_file").change(function (e) {
+            //div 내용 비워주기
+            $('#Preview').empty();
+
+            let files = e.target.files;
+            let arr = Array.prototype.slice.call(files);
+
+            preview(arr);
+
+            function preview(arr) {
+                arr.forEach(function (f) {
+                    //div에 이미지 추가
+                    let str = '<li class="ui-state-default">';
+
+                    //이미지 파일 미리보기
+                    if (f.type.match('image.*')) {
+                        //파일을 읽기 위한 FileReader객체 생성
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                            str += '<img src="' + e.target.result + '" title="' + f.name + '" width=100 height=100>';
+                            str += '<span class="btn" onclick="delImg(this)"> X </span>';
+                            str += '</li>';
+                            $(str).appendTo('#Preview');
+                        }
+                        reader.readAsDataURL(f);
+                    } else {
+
+                    }
+                })
+            }
+        })
+    })
+
+    //이미지 삭제
+    function delImg(_this) {
+        $(_this).parent('li').remove()
+    }
+</script>
+</html>

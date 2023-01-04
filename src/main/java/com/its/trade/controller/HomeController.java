@@ -9,4 +9,20 @@ public class HomeController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/category/armor")
+    public String armor() {
+        return "Item/item_armor";
+    }
+
+    @GetMapping("/category/weapon")
+    public String weapon() {
+        return "Item/item_weapon";
+    }
+
+    @GetMapping("/category/accessory")
+    public String accessory() {
+        return "Item/item_accessory";
+    }
+
 }
