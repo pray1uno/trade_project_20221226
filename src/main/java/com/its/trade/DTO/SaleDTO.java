@@ -17,6 +17,7 @@ import java.util.List;
 public class SaleDTO {
     private Long id;
     private String itemCategory;
+    private String subCategory;
     private String itemName;
     private String itemPrice;
     private int itemCount;
@@ -35,6 +36,7 @@ public class SaleDTO {
 
         saleDTO.setId(saleEntity.getId());
         saleDTO.setItemCategory(saleEntity.getItemCategory());
+        saleDTO.setSubCategory(saleEntity.getSubCategory());
         saleDTO.setItemName(saleEntity.getItemName());
         saleDTO.setItemPrice(saleEntity.getItemPrice());
         saleDTO.setItemCount(saleEntity.getItemCount());

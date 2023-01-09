@@ -21,6 +21,9 @@ public class SaleEntity extends BaseEntity{
     @Column(nullable = false, length = 10)
     private String itemCategory;
 
+    @Column(nullable = false, length = 10)
+    private String subCategory;
+
     @Column(nullable = false)
     private String itemName;
 
@@ -52,6 +55,7 @@ public class SaleEntity extends BaseEntity{
         SaleEntity saleEntity = new SaleEntity();
 
         saleEntity.setItemCategory(saleDTO.getItemCategory());
+        saleEntity.setSubCategory(saleDTO.getSubCategory());
         saleEntity.setItemName(saleDTO.getItemName());
         saleEntity.setItemPrice(saleDTO.getItemPrice());
         saleEntity.setItemCount(saleDTO.getItemCount());
@@ -66,6 +70,7 @@ public class SaleEntity extends BaseEntity{
         SaleEntity saleEntity = new SaleEntity();
 
         saleEntity.setItemCategory(saleDTO.getItemCategory());
+        saleEntity.setSubCategory(saleDTO.getSubCategory());
         saleEntity.setItemName(saleDTO.getItemName());
         saleEntity.setItemPrice(saleDTO.getItemPrice());
         saleEntity.setItemCount(saleDTO.getItemCount());

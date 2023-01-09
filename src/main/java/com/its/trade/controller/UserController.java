@@ -57,7 +57,7 @@ public class UserController {
         if (result != null) {
             session.setAttribute("login", result);
             model.addAttribute("login", result);
-            return "index";
+            return "redirect:/";
         } else {
             return "User/user_login";
         }
@@ -67,6 +67,6 @@ public class UserController {
     public String userLogout(HttpSession session) {
         session.invalidate();
 
-        return "index";
+        return "redirect:/";
     }
 }

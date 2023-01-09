@@ -18,7 +18,7 @@
             <tr>
                 <th>카테고리</th>
                 <td>
-                    <select name="itemCategory" class="form-select">
+                    <select name="itemCategory" class="form-select" onchange="category_select(this)">
                         <option value="무기" selected>무기</option>
                         <option value="방어구">방어구</option>
                         <option value="장신구">장신구</option>
@@ -26,6 +26,18 @@
                 </td>
             </tr>
 
+            <tr>
+                <th>분류</th>
+                <td id="selectId">
+                    <select name="subCategory" id="subCategory" class="form-select">
+                        <option value="검" selected>검</option>
+                        <option value="활">활</option>
+                        <option value="지팡이">지팡이</option>
+                        <option value="아대">아대</option>
+                        <option value="너클">너클</option>
+                    </select>
+                </td>
+            </tr>
             <tr>
                 <th>아이템 이름</th>
                 <td>
@@ -142,6 +154,36 @@
     //이미지 삭제
     function delImg(_this) {
         $(_this).parent('li').remove()
+    }
+
+    function category_select(e) {
+        const opt = document.createElement("option");
+        const select = document.getElementById("selectId");
+        opt.innerHTML = "";
+
+        const category_weapon = ["검", "활", "지팡이", "아대", "너클"];
+        const category_armor = ["모자", "상의", "하의", "장갑", "망토", "신발"];
+        const category_accessory = ["귀걸이", "반지", "목걸이", "벨트"];
+        const target = document.getElementById("subCategory");
+
+        if (e.value == "무기") var result = category_weapon;
+        else if (e.value == "방어구") var result = category_armor;
+        else if (e.value == "장신구") var result = category_accessory;
+
+        target.options.lenght = 0;
+
+        let id =
+            "                    <select name=\"subCategory\" id=\"subCategory\" class=\"form-select\">\n" +
+            "                        <option>아이템 분류를 선택해 주세요.</option>\n"
+
+        for (x in result) {
+            // opt.value = result[x];
+            // opt.innerHTML = result[x];
+            // target.appendChild(opt);
+            id += "<option>"+ result[x] + "</option>\\n\""
+        }
+         id += "                    </select>"
+        select.innerHTML = id;
     }
 </script>
 </html>

@@ -6,11 +6,14 @@ import com.its.trade.entity.SaleFileEntity;
 import com.its.trade.repository.SaleFileRepository;
 import com.its.trade.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +47,17 @@ public class SaleService {
                 saleFileRepository.save(saleFileEntity);
             }
         }
+    }
+
+    @Transactional
+    public List<SaleDTO> findAll() {
+       List<SaleEntity> saleEntityList = saleRepository.findAll(Sort.by(Sort.Direction.DESC,"id"));
+
+       List<SaleDTO> saleDTOList = new ArrayList<>();
+
+       for (SaleEntity saleEntity : saleEntityList) {
+           saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+       }
+       return saleDTOList;
     }
 }
