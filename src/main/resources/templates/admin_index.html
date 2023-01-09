@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container">
+    <button class="btn" onclick="userControl()">회원관리</button>
+</div>
+</body>
+<script th:inline="javascript">
+    const userControl = () => {
+        location.href = "/admin/user";
+
+    }
+</script>
+</html>

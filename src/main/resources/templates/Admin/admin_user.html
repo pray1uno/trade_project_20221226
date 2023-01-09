@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin_User</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/axios.min.js}"></script>
+    <style>
+        #admin {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container" id="admin">
+    <table class="table">
+        <tr>
+            <th>회원번호</th>
+            <th>이름</th>
+            <th>비밀번호</th>
+            <th>연락처</th>
+            <th>구분</th>
+            <th>거래여부</th>
+            <th>회원삭제</th>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.userPassword}"></td>
+            <td th:text="${user.userMobile}"></td>
+
+            <td th:if="${user.userRole == 1}">일반</td>
+            <td th:if="${user.userRole == 2}">정지</td>
+            <td th:if="${user.userRole == 9}">관리자</td>
+
+            <td th:if="${user.userRole == 1}">
+                <button class="btn btn-primary" th:onclick="trade_withdraw([[${user.id}]])">권한회수</button>
+            </td>
+            <td th:if="${user.userRole == 2}">
+                <button class="btn btn-primary" th:onclick="trade_give([[${user.id}]])">권한부여</button>
+            </td>
+            <td th:if="${user.userRole == 9}">
+                <button class="btn">관리자</button>
+            </td>
+
+            <td th:if="${user.userRole != 9}">
+                <button class="btn btn-close" th:onclick="user_delete([[${user.id}]])"></button>
+            </td>
+            <td th:if="${user.userRole == 9}">　</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script th:inline="javascript">
+    const user_delete = (deleteId) => {
+        if (confirm("해당 회원을 정말 삭제하시겠습니까?")) {
+            if (true) {
+                axios({
+                    method: "delete",
+                    url: "/admin/user/delete/" + deleteId,
+                }).then(res => {
+                    alert("삭제 성공");
+                    location.href = "/admin/user";
+                }).catch(err => {
+                    alert("삭제 실패");
+                })
+            }
+        }
+
+    }
+
+    const trade_withdraw = (withdrawId) => {
+        location.href = "/admin/user/withdraw?id=" + withdrawId;
+
+    }
+
+    const trade_give = (giveId) => {
+        location.href = "/admin/user/give?id=" + giveId;
+    }
+</script>
+</html>
