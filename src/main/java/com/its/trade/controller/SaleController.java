@@ -41,11 +41,10 @@ public class SaleController {
                            Model model) {
         saleService.updateHits(id);
         SaleDTO saleDTO = saleService.findById(id);
-        System.out.println("saleDTO = " + saleDTO);
         model.addAttribute("findById", saleDTO);
 
         return "Item/item_detail";
 
-
     }
+
 }

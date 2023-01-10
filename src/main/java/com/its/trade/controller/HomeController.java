@@ -1,10 +1,19 @@
 package com.its.trade.controller;
 
+import com.its.trade.DTO.SaleDTO;
+import com.its.trade.service.SaleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
+    private final SaleService saleService;
+
 //    @GetMapping("/")
 //    public String index() {
 //        return "index";
@@ -16,7 +25,9 @@ public class HomeController {
     }
 
     @GetMapping("/category/weapon")
-    public String weapon() {
+    public String weapon(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByItemCategory();
+        model.addAttribute("weaponList", saleDTOList);
         return "Item/item_weapon";
     }
 

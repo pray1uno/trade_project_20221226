@@ -40,6 +40,12 @@
         #categoryTab a:hover:after {
             transform: scaleX(1);
         }
+
+        #table_list {
+            margin-top: 75px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -70,6 +76,45 @@
             </li>
         </ul>
     </div>
+</div>
+
+<div class="container" id="table_list">
+    <table class="table">
+        <tr>
+            <th>번호</th>
+            <th>이미지</th>
+            <th>카테고리</th>
+            <th>소분류</th>
+            <th>아이템 이름</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>판매자</th>
+            <th>조회수</th>
+            <th>등록시간</th>
+        </tr>
+        <tr th:each="weapon : ${weaponList}">
+            <td th:text="${weapon.id}"></td>
+
+            <td th:if="${weapon.fileAttached.equals('N')}">
+                <a th:href="@{|/item/${weapon.id}|}">
+                    <img src="/img/noimg.gif" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:each="fileName : ${weapon.storedFileName}">
+                <a th:href="@{|/item/${weapon.id}|}">
+                    <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:text="${weapon.itemCategory}"></td>
+            <td th:text="${weapon.subCategory}"></td>
+            <td th:text="${weapon.itemName}"></td>
+            <td th:text="${weapon.itemPrice}"></td>
+            <td th:text="${weapon.itemCount}"></td>
+            <td th:text="${weapon.sellerName}"></td>
+            <td th:text="${weapon.itemHits}"></td>
+            <td th:text="*{#temporals.format(weapon.itemCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

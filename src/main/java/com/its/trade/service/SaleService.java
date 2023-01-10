@@ -78,4 +78,19 @@ public class SaleService {
             return null;
         }
     }
+
+
+    @Transactional
+    public List<SaleDTO> findByItemCategory() {
+        String weapon = "무기";
+        List<SaleEntity> saleEntity = saleRepository.findByItemCategory(weapon,Sort.by(Sort.Direction.DESC,"id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity sale : saleEntity) {
+            saleDTOList.add(SaleDTO.toSaleDTO(sale));
+        }
+
+        return saleDTOList;
+
+    }
 }
