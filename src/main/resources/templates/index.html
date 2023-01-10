@@ -56,14 +56,18 @@
         <tr th:each="item : ${itemList}">
             <td th:text="${item.id}"></td>
             <td th:if="${item.storedFileName == null}">
-                <img src="/img/noimg.gif" width="100px" height="100px">
+                <a th:href="@{|/item/${item.id}|}">
+                    <img src="/img/noimg.gif" width="100px" height="100px">
+                </a>
             </td>
             <td th:each="fileName : ${item.storedFileName}">
-                <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
+                <a th:href="@{|/item/${item.id}|}">
+                    <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
+                </a>
             </td>
             <td th:text="${item.itemCategory}"></td>
             <td th:text="${item.subCategory}"></td>
-            <td th:text="${item.itemName}"></td>
+            <td><a th:href="@{|/item/${item.id}|}" th:text="${item.itemName}" class="nav-link"></a></td>
             <td th:text="${item.itemPrice}"></td>
             <td th:text="${item.itemCount}"></td>
             <td th:text="${item.sellerName}"></td>

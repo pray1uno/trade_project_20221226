@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Item_Detail</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #form {
+            display: flex;
+            margin-top: 50px;
+        }
+        img {
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container" id="form">
+    <div th:each="file : ${findById.storedFileName}" class="container">
+        <img th:src="@{|/upload/${file}}" width="550px" height="600px">
+    </div>
+    <div class="container" th:if="${findById.storedFileName == null}">
+        <img src="/img/noimg.gif" width="550px" height="600px">
+    </div>
+
+    <div class="container">
+        <div>
+            <h1 th:text="${findById.itemName}"></h1>
+        </div>
+        <div>
+            <table class="table">
+                <tbody>
+                <tr rel="subCategory">
+                    <th scope="row">
+                        <span>분류</span>
+                    </th>
+                    <td>
+                        <span th:text="${findById.subCategory}"></span>
+                    </td>
+                </tr>
+                <tr rel="판매가">
+                    <th scope="row">
+                        <span>판매가격</span>
+                    </th>
+                    <td>
+                        <span th:text="${findById.itemPrice}"></span>
+                    </td>
+                </tr>
+                <tr rel="판매자">
+                    <th scope="row">
+                        <span>판매자</span>
+                    </th>
+                    <td>
+                        <span th:text="${findById.sellerName}"></span>
+                    </td>
+                </tr>
+                <tr rel="수량">
+                    <th scope="row">
+                        <span>수량</span>
+                    </th>
+                    <td>
+                        <span th:text="${findById.itemCount}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

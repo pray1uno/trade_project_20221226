@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
@@ -35,4 +36,16 @@ public class SaleController {
         return "index";
     }
 
+    @GetMapping("/item/{id}")
+    public String findById(@PathVariable Long id,
+                           Model model) {
+        saleService.updateHits(id);
+        SaleDTO saleDTO = saleService.findById(id);
+        System.out.println("saleDTO = " + saleDTO);
+        model.addAttribute("findById", saleDTO);
+
+        return "Item/item_detail";
+
+
+    }
 }

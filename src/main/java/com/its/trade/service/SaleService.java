@@ -60,4 +60,22 @@ public class SaleService {
        }
        return saleDTOList;
     }
+
+    @Transactional
+    public void updateHits(Long id) {
+        saleRepository.updateHits(id);
+    }
+
+    @Transactional
+    public SaleDTO findById(Long id) {
+        System.out.println("id = " + id);
+        Optional<SaleEntity> optionalSaleEntity = saleRepository.findById(id);
+
+
+        if (optionalSaleEntity.isPresent()) {
+            return SaleDTO.toSaleDTO(optionalSaleEntity.get());
+        } else {
+            return null;
+        }
+    }
 }
