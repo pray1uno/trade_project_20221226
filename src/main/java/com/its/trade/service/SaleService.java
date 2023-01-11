@@ -119,4 +119,199 @@ public class SaleService {
 
         return saleDTOList;
     }
+
+    @Transactional
+    public List<SaleDTO> findByWeaponSword() {
+        String weaponSub = "검";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(weaponSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByWeaponBow() {
+        String weaponSub = "활";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(weaponSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByWeaponWand() {
+        String weaponSub = "지팡이";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(weaponSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByWeaponArmband() {
+        String weaponSub = "아대";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(weaponSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByWeaponKnuckle() {
+        String weaponSub = "너클";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(weaponSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorHelmet() {
+        String armorSub = "모자";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorTop() {
+        String armorSub = "상의";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorPants() {
+        String armorSub = "하의";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorGloves() {
+        String armorSub = "장갑";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorCape() {
+        String armorSub = "망토";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmorShoes() {
+        String armorSub = "신발";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(armorSub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByAccessoryEarring() {
+        String accessorySub = "귀걸이";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(accessorySub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByAccessoryRing() {
+        String accessorySub = "반지";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(accessorySub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByAccessoryPendant() {
+        String accessorySub = "목걸이";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(accessorySub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByAccessoryBelt() {
+        String accessorySub = "벨트";
+        List<SaleEntity> saleEntityList = saleRepository.findBySubCategory(accessorySub,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
 }

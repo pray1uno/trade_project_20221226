@@ -41,77 +41,107 @@ public class HomeController {
     }
 
     @GetMapping("/sales/armor/helmet")
-    public String armor_helmet_form() {
+    public String armor_helmet_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorHelmet();
+        model.addAttribute("helmet", saleDTOList);
         return "Armor/armor_helmet";
     }
 
     @GetMapping("/sales/armor/top")
-    public String armor_top_form() {
+    public String armor_top_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorTop();
+        model.addAttribute("top", saleDTOList);
         return "Armor/armor_top";
     }
 
     @GetMapping("/sales/armor/pants")
-    public String armor_pants_form() {
+    public String armor_pants_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorPants();
+        model.addAttribute("pants", saleDTOList);
         return "Armor/armor_pants";
     }
 
     @GetMapping("/sales/armor/gloves")
-    public String armor_gloves_form() {
+    public String armor_gloves_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorGloves();
+        model.addAttribute("gloves", saleDTOList);
         return "Armor/armor_gloves";
     }
 
     @GetMapping("/sales/armor/cape")
-    public String armor_cape_form() {
+    public String armor_cape_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorCape();
+        model.addAttribute("cape", saleDTOList);
         return "Armor/armor_cape";
     }
 
     @GetMapping("/sales/armor/shoes")
-    public String armor_shoes_form() {
+    public String armor_shoes_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmorShoes();
+        model.addAttribute("shoes", saleDTOList);
         return "Armor/armor_shoes";
     }
 
     @GetMapping("/sales/weapon/sword")
-    public String weapon_sword_form() {
+    public String weapon_sword_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByWeaponSword();
+        model.addAttribute("sword", saleDTOList);
         return "Weapon/weapon_sword";
     }
 
     @GetMapping("/sales/weapon/bow")
-    public String weapon_bow_form() {
+    public String weapon_bow_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByWeaponBow();
+        model.addAttribute("bow", saleDTOList);
         return "Weapon/weapon_bow";
     }
 
     @GetMapping("/sales/weapon/wand")
-    public String weapon_wand_form() {
+    public String weapon_wand_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByWeaponWand();
+        model.addAttribute("wand", saleDTOList);
         return "Weapon/weapon_wand";
     }
 
     @GetMapping("/sales/weapon/armband")
-    public String weapon_armband_form() {
+    public String weapon_armband_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByWeaponArmband();
+        model.addAttribute("armband", saleDTOList);
         return "Weapon/weapon_armband";
     }
 
     @GetMapping("/sales/weapon/knuckle")
-    public String weapon_knuckle_form() {
+    public String weapon_knuckle_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByWeaponKnuckle();
+        model.addAttribute("knuckle", saleDTOList);
         return "Weapon/weapon_knuckle";
     }
 
     @GetMapping("/sales/accessory/earring")
-    public String accessory_earring_form() {
+    public String accessory_earring_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByAccessoryEarring();
+        model.addAttribute("earring", saleDTOList);
         return "Accessory/accessory_earring";
     }
 
     @GetMapping("/sales/accessory/ring")
-    public String accessory_ring_form() {
+    public String accessory_ring_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByAccessoryRing();
+        model.addAttribute("ring", saleDTOList);
         return "Accessory/accessory_ring";
     }
 
     @GetMapping("/sales/accessory/pendant")
-    public String accessory_pendant_form() {
+    public String accessory_pendant_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByAccessoryPendant();
+        model.addAttribute("pendant", saleDTOList);
         return "Accessory/accessory_pendant";
     }
 
     @GetMapping("/sales/accessory/belt")
-    public String accessory_belt_form() {
+    public String accessory_belt_form(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByAccessoryBelt();
+        model.addAttribute("belt", saleDTOList);
         return "Accessory/accessory_belt";
     }
 
