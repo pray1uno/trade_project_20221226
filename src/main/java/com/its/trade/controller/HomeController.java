@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -145,4 +146,11 @@ public class HomeController {
         return "Accessory/accessory_belt";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam("keyword") String keyword,
+                         Model model) {
+        List<SaleDTO> saleDTOList = saleService.search(keyword);
+        model.addAttribute("search", saleDTOList);
+        return "search_index";
+    }
 }

@@ -314,4 +314,17 @@ public class SaleService {
 
         return saleDTOList;
     }
+
+    @Transactional
+    public List<SaleDTO> search(String keyword) {
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+        List<SaleEntity> saleEntityList = null;
+
+        saleEntityList = saleRepository.findByItemNameContainingOrSellerNameContainingOrderByIdDesc(keyword,keyword,Sort.by(Sort.Direction.DESC, "id"));
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+            return saleDTOList;
+    }
 }
