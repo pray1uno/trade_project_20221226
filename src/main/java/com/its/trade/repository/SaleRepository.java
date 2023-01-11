@@ -17,4 +17,5 @@ public interface SaleRepository extends JpaRepository<SaleEntity, Long> {
 
 
     List<SaleEntity> findByItemCategory(String weapon, Sort id);
+
 }

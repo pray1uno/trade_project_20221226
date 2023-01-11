@@ -40,6 +40,11 @@
         #categoryTab a:hover:after {
             transform: scaleX(1);
         }
+
+        #table_list {
+            margin-top: 75px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +78,44 @@
             </li>
         </ul>
     </div>
+</div>
+
+<div class="container" id="table_list">
+    <table class="table">
+        <tr>
+            <th>번호</th>
+            <th>이미지</th>
+            <th>카테고리</th>
+            <th>소분류</th>
+            <th>아이템 이름</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>판매자</th>
+            <th>조회수</th>
+            <th>등록시간</th>
+        </tr>
+        <tr th:each="armor : ${armorList}">
+            <td th:text="${armor.id}"></td>
+            <td th:if="${armor.fileAttached.equals('N')}">
+                <a th:href="@{|/item/${armor.id}|}">
+                    <img src="/img/noimg.gif" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:each="fileName : ${armor.storedFileName}">
+                <a th:href="@{|/item/${armor.id}|}">
+                    <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:text="${armor.itemCategory}"></td>
+            <td th:text="${armor.subCategory}"></td>
+            <td th:text="${armor.itemName}"></td>
+            <td th:text="${armor.itemPrice}"></td>
+            <td th:text="${armor.itemCount}"></td>
+            <td th:text="${armor.sellerName}"></td>
+            <td th:text="${armor.itemHits}"></td>
+            <td th:text="*{#temporals.format(armor.itemCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

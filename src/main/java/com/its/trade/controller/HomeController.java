@@ -20,19 +20,23 @@ public class HomeController {
 //    }
 
     @GetMapping("/category/armor")
-    public String armor() {
+    public String armor(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByArmor();
+        model.addAttribute("armorList", saleDTOList);
         return "Item/item_armor";
     }
 
     @GetMapping("/category/weapon")
     public String weapon(Model model) {
-        List<SaleDTO> saleDTOList = saleService.findByItemCategory();
+        List<SaleDTO> saleDTOList = saleService.findByWeapon();
         model.addAttribute("weaponList", saleDTOList);
         return "Item/item_weapon";
     }
 
     @GetMapping("/category/accessory")
-    public String accessory() {
+    public String accessory(Model model) {
+        List<SaleDTO> saleDTOList = saleService.findByAccessory();
+        model.addAttribute("accessoryList", saleDTOList);
         return "Item/item_accessory";
     }
 

@@ -81,7 +81,7 @@ public class SaleService {
 
 
     @Transactional
-    public List<SaleDTO> findByItemCategory() {
+    public List<SaleDTO> findByWeapon() {
         String weapon = "무기";
         List<SaleEntity> saleEntity = saleRepository.findByItemCategory(weapon,Sort.by(Sort.Direction.DESC,"id"));
         List<SaleDTO> saleDTOList = new ArrayList<>();
@@ -92,5 +92,31 @@ public class SaleService {
 
         return saleDTOList;
 
+    }
+
+    @Transactional
+    public List<SaleDTO> findByArmor() {
+        String armor = "방어구";
+        List<SaleEntity> saleEntityList = saleRepository.findByItemCategory(armor,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
+    }
+
+    @Transactional
+    public List<SaleDTO> findByAccessory() {
+        String accessory = "장신구";
+        List<SaleEntity> saleEntityList = saleRepository.findByItemCategory(accessory,Sort.by(Sort.Direction.DESC, "id"));
+        List<SaleDTO> saleDTOList = new ArrayList<>();
+
+        for (SaleEntity saleEntity : saleEntityList) {
+            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+        }
+
+        return saleDTOList;
     }
 }

@@ -5,8 +5,88 @@
     <title>Item_Weapon_Bow</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        #weapon_box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        #categoryTab a {
+            font-weight: bold;
+            line-height: 40px;
+            text-decoration: none;
+            color: dimgray;
+        }
+
+        #categoryTab li {
+            display: inline-block;
+            padding: 0 40px 0 0;
+        }
+
+        #categoryTab a:after {
+            display: block;
+            content: '';
+            border-bottom: solid 3px black;
+            transform: scaleX(0);
+            transition: transform 250ms ease-in-out;
+        }
+
+        #categoryTab a:hover:after {
+            transform: scaleX(1);
+        }
+
+        #bow {
+            padding: 0px 0px 10px 0px;
+            text-transform: uppercase;
+            border-bottom: solid 3px black;
+        }
+
+        #table_list {
+            margin-top: 75px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 <th:block th:replace="layout/header :: header"></th:block>
+<div class="container">
+    <div class="container" id="weapon_box">
+        <h1>
+            <span>활</span>
+        </h1>
+    </div>
+
+    <div id="categoryTab">
+        <ul class="nav justify-content-center">
+            <li>
+                <a href="/sales/weapon/sword">검</a>
+            </li>
+            <li>
+                <a href="/sales/weapon/bow" id="bow">활</a>
+            </li>
+            <li>
+                <a href="/sales/weapon/wand">지팡이</a>
+            </li>
+            <li>
+                <a href="/sales/weapon/armband">아대</a>
+            </li>
+            <li>
+                <a href="/sales/weapon/knuckle">너클</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="container" id="table_list">
+    <table class="table">
+
+    </table>
+</div>
 </body>
 </html>
