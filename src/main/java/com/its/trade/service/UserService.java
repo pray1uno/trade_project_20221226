@@ -6,6 +6,7 @@ import com.its.trade.entity.UserProfileEntity;
 import com.its.trade.repository.UserProfileRepository;
 import com.its.trade.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,4 +67,23 @@ public class UserService {
             return "Y";
         }
     }
+
+    @Transactional
+    public UserDTO findByUserName(String userName) {
+        Optional<UserEntity> optionalUserEntity = userRepository.findByUserName(userName);
+
+        if (optionalUserEntity.isPresent()) {
+            return UserDTO.toUserDTO(optionalUserEntity.get());
+        } else {
+            return null;
+        }
+    }
+
+
+    public void update(UserDTO userDTO) {
+        UserEntity userEntity = UserEntity.toUserUpdateEntity(userDTO);
+        userRepository.save(userEntity);
+
+    }
+
 }

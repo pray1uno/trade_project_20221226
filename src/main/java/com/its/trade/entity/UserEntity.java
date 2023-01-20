@@ -65,4 +65,18 @@ public class UserEntity {
 
         return userEntity;
     }
+
+    public static UserEntity toUserUpdateEntity(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+
+        userEntity.setId(userDTO.getId());
+        userEntity.setUserName(userDTO.getUserName());
+        userEntity.setUserPassword(userDTO.getUserPassword());
+        userEntity.setUserMobile(userDTO.getUserMobile());
+        userEntity.setUserRole(userDTO.getUserRole());
+        userEntity.setFileAttached(userDTO.getFileAttached());
+
+        return userEntity;
+    }
+
 }

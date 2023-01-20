@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User_Update</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #span {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        #button {
+            text-align: center;
+        }
+
+        #update {
+            width: 800px;
+        }
+
+        #nameInput {
+            outline: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container" id="span">
+    <span><h1>회원정보 수정</h1></span>
+</div>
+
+<div class="container" id="update">
+    <form action="/user/update" method="post" name="updateForm" enctype="multipart/form-data">
+        <table class="table border-2">
+            <tr>
+                <input type="hidden" name="id" id="id" th:value="${session.login.id}">
+                <input type="hidden" name="userRole" id="userRole" th:value="${session.login.userRole}">
+                <input type="hidden" name="fileAttached" th:value="${session.login.fileAttached}">
+                <th>아이디</th>
+                <td>
+                    <input type="text" th:value="${session.login.userName}" name="userName" readonly style="width: 200px"
+                           id="nameInput">
+                </td>
+            </tr>
+            <tr>
+                <th>현재 비밀번호</th>
+                <td>
+                    <input type="text" class="form-control" style="width: 200px">
+                </td>
+            </tr>
+            <tr>
+                <th>새로운 비밀번호</th>
+                <td>
+                    <input type="text" name="userPassword" class="form-control" style="width: 200px">
+                </td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td>
+                    <input type="text" name="userMobile" class="form-control" th:value="${session.login.userMobile}"
+                           style="width: 200px">
+                </td>
+            </tr>
+            <tr>
+                <th>프로필사진</th>
+                <td>
+                    <input type="file" name="userProfile" class="form-control" style="width: 400px">
+                </td>
+<!--                이거 아직 안됨 -->
+
+            </tr>
+        </table>
+        <div class="container" id="button">
+            <button class="btn" onclick="update_complete()">수정완료</button>
+            <button class="btn" onclick="update_cancel()">취소</button>
+        </div>
+    </form>
+</div>
+</body>
+<script th:inline="javascript">
+    const update_complete = () => {
+        document.updateForm.submit();
+    }
+
+    const update_cancel = () => {
+        location.href = "/user/myPage";
+    }
+</script>
+</html>

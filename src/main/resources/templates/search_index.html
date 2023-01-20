@@ -1,59 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Search_Result</title>
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-  <script th:src="@{/js/jquery.js}"></script>
-  <style>
-    #span {
-      text-align: center;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Search_Result</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #span {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        #item_table {
+            text-align: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="layout/header :: header"></th:block>
 <div class="container" id="span">
-  <span><h1>검색 결과</h1></span>
+    <span><h1>검색 결과</h1></span>
 </div>
 <div class="container" id="item_table">
-  <table class="table">
-    <tr>
-      <th>번호</th>
-      <th>이미지</th>
-      <th>카테고리</th>
-      <th>소분류</th>
-      <th>아이템 이름</th>
-      <th>가격</th>
-      <th>수량</th>
-      <th>판매자</th>
-      <th>조회수</th>
-      <th>등록시간</th>
-    </tr>
-    <tr th:each="result : ${search}">
-      <td th:text="${result.id}"></td>
-      <td th:if="${result.storedFileName == null}">
-        <a th:href="@{|/item/${result.id}|}">
-          <img src="/img/noimg.gif" width="100px" height="100px">
-        </a>
-      </td>
-      <td th:each="fileName : ${result.storedFileName}">
-        <a th:href="@{|/item/${result.id}|}">
-          <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
-        </a>
-      </td>
-      <td th:text="${result.itemCategory}"></td>
-      <td th:text="${result.subCategory}"></td>
-      <td><a th:href="@{|/item/${result.id}|}" th:text="${result.itemName}" class="nav-link"></a></td>
-      <td th:text="${result.itemPrice}"></td>
-      <td th:text="${result.itemCount}"></td>
-      <td th:text="${result.sellerName}"></td>
-      <td th:text="${result.itemHits}"></td>
-      <td th:text="*{#temporals.format(result.itemCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-    </tr>
-  </table>
+    <table class="table">
+        <tr>
+            <th>번호</th>
+            <th>이미지</th>
+            <th>카테고리</th>
+            <th>소분류</th>
+            <th>아이템 이름</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>판매자</th>
+            <th>조회수</th>
+            <th>등록시간</th>
+        </tr>
+        <tr th:each="result : ${search}">
+            <td th:text="${result.id}"></td>
+            <td th:if="${result.storedFileName == null}">
+                <a th:href="@{|/item/${result.id}|}">
+                    <img src="/img/noimg.gif" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:each="fileName : ${result.storedFileName}">
+                <a th:href="@{|/item/${result.id}|}">
+                    <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
+                </a>
+            </td>
+            <td th:text="${result.itemCategory}"></td>
+            <td th:text="${result.subCategory}"></td>
+            <td><a th:href="@{|/item/${result.id}|}" th:text="${result.itemName}" class="nav-link"></a></td>
+            <td th:text="${result.itemPrice}"></td>
+            <td th:text="${result.itemCount}"></td>
+            <td th:text="${result.sellerName}"></td>
+            <td th:text="${result.itemHits}"></td>
+            <td th:text="*{#temporals.format(result.itemCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

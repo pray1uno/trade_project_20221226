@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User_MyPage</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #span {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        #form {
+            display: flex;
+            margin-top: 50px;
+        }
+        img {
+            margin-right: 50px;
+        }
+
+        .table-borderless {
+            border-collapse: separate;
+            border-spacing: 0 20px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container" id="span">
+    <span><h1>MY PAGE</h1></span>
+</div>
+
+<div class="container" id="form">
+    <div th:each="file : ${session.login.storedFileName}" class="container">
+        <img th:src="@{|/upload/${file}}" width="500px" height="500px">
+    </div>
+    <div class="container" th:if="${session.login.storedFileName == null}">
+        <img src="/img/noimg.gif" width="500px" height="500px">
+    </div>
+
+    <div class="container">
+        <div>
+            <h1 th:text="${session.login.userName}"></h1>
+        </div>
+        <div>
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <th>
+                        <span>거래권한</span>
+                    </th>
+                    <td>
+                        <span th:if="${session.login.userRole == 1}">판매 가능</span>
+                        <span th:if="${session.login.userRole == 2}">판매 불가</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>메뉴</th>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn btn-outline-primary">판매내역 조회</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary" onclick="to_user_update()">회원정보 수정</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-primary">거래권한 신청</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const to_user_update = () => {
+        location.href = "/user/update";
+
+    }
+</script>
+</html>

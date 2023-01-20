@@ -1,6 +1,7 @@
 package com.its.trade.controller;
 
 import com.its.trade.DTO.UserDTO;
+import com.its.trade.service.SaleService;
 import com.its.trade.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final SaleService saleService;
 
     @GetMapping("/user/save")
     public String saveForm() {
@@ -29,7 +31,7 @@ public class UserController {
     public String userSave(@ModelAttribute UserDTO userDTO) throws IOException {
         userService.save(userDTO);
 
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/user/save/nameCheck")
@@ -68,5 +70,25 @@ public class UserController {
         session.invalidate();
 
         return "redirect:/";
+    }
+
+    @GetMapping("/user/myPage")
+    public String myPageForm() {
+        return "User/user_myPage";
+    }
+
+    @GetMapping("/user/update")
+    public String updateForm(Model model,
+                             HttpSession session) {
+        UserDTO result = (UserDTO) session.getAttribute("login");
+        UserDTO userDTO = userService.findByUserName(result.getUserName());
+        model.addAttribute("update", userDTO);
+        return "User/user_update";
+    }
+
+    @PostMapping("/user/update")
+    public String update(UserDTO userDTO) {
+        userService.update(userDTO);
+        return "User/user_update";
     }
 }

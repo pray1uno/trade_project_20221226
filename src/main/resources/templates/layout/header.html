@@ -10,6 +10,7 @@
     <style>
         nav {
             text-align: center;
+
         }
 
         #one {
@@ -21,6 +22,7 @@
             display: inline-block;
             float: right;
             margin-top: 25px;
+            width: 250px;
         }
 
         #three {
@@ -38,14 +40,21 @@
         }
 
         #tab {
-            padding: 40px 0 0 0;
+            padding: 70px 0 0 0;
+            width: 100%;
+
         }
 
         #three input {
             border: none;
             outline: none;
             border-bottom: solid 5px black;
-            width: 85%;
+            width: 425px;
+            justify-content: center;
+        }
+
+        #sForm {
+            vertical-align: top;
         }
     </style>
     <body>
@@ -71,8 +80,8 @@
                         <li class="nav-item" th:if="${session.login != null}">
                             <a href="/user/logout" class="nav-link">로그아웃</a>
                         </li>
-                        <li class="nav-item" th:if="${session.login != null && session.login.userRole == 1}">
-                            <a href="#" class="nav-link">마이페이지</a>
+                        <li class="nav-item" th:if="${session.login != null && session.login.userRole != 9}">
+                            <a href="/user/myPage" class="nav-link">마이페이지</a>
                         </li>
                         <li class="nav-item" th:if="${session.login != null && session.login.userRole == 1}">
                             <a href="#" class="nav-link">찜목록</a>
@@ -88,24 +97,18 @@
 
     <div class="container" id="total2">
         <div id="three">
-            <form action="/search" role="search" method="get">
+            <form action="/search" role="search" method="get" id="sForm">
                 <input type="search" name="keyword">
                 <button class="btn" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
     </div>
 
-    <nav>
-        <div>
-            <section>
-                <ul class="nav justify-content-center" id="tab">
-                    <li class="nav-item"><a href="/category/weapon" class="nav-link">무기</a></li>
-                    <li class="nav-item"><a href="/category/armor" class="nav-link">방어구</a></li>
-                    <li class="nav-item"><a href="/category/accessory" class="nav-link">장신구</a></li>
-                </ul>
-            </section>
-        </div>
-    </nav>
+    <ul class="nav justify-content-center" id="tab">
+        <li class="nav-item"><a href="/category/weapon" class="nav-link">무기</a></li>
+        <li class="nav-item"><a href="/category/armor" class="nav-link">방어구</a></li>
+        <li class="nav-item"><a href="/category/accessory" class="nav-link">장신구</a></li>
+    </ul>
     </body>
 </th:block>
 <script th:inline="javascript">
