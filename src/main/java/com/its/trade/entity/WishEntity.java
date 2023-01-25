@@ -17,14 +17,20 @@ public class WishEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
-    private String wishName;
+//    @Column(length = 20)
+//    private String wishName;
+//
+//    @Column(length = 14)
+//    private int wishPrice;
+//
+//    @Column(length = 4)
+//    private int wishCount;
 
-    @Column(length = 14)
-    private int wishPrice;
+    @Column(length = 15)
+    private String totalPrice;
 
     @Column(length = 4)
-    private int wishCount;
+    private int totalCount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_id")
@@ -34,14 +40,15 @@ public class WishEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    public static WishEntity toWishSaveEntity(SaleEntity saleEntity, UserEntity userEntity, WishDTO wishDTO) {
+
+    public static WishEntity toWishSaveEntity(UserEntity userEntity, SaleEntity saleEntity) {
         WishEntity wishEntity = new WishEntity();
 
-        wishEntity.setWishName(wishDTO.getWishName());
-        wishEntity.setWishPrice(wishDTO.getWishPrice());
-        wishEntity.setWishCount(wishDTO.getWishCount());
-        wishEntity.setSaleEntity(saleEntity);
+//        wishEntity.setWishName(wishDTO.getWishName());
+//        wishEntity.setWishPrice(wishDTO.getWishPrice());
+//        wishEntity.setWishCount(wishDTO.getWishCount());
         wishEntity.setUserEntity(userEntity);
+        wishEntity.setSaleEntity(saleEntity);
 
         return wishEntity;
     }

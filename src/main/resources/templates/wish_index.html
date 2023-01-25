@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wish_List</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <style>
+        #wish {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="layout/header :: header"></th:block>
+<div class="container" id="wish">
+    <span><h1>찜목록</h1></span>
+</div>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>선택</th>
+            <th>판매번호</th>
+            <th>이미지</th>
+            <th>카테고리</th>
+            <th>소분류</th>
+            <th>아이템 이름</th>
+            <th>가격</th>
+            <th>수량</th>
+            <th>판매자</th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
