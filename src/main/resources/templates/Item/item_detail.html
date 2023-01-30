@@ -72,40 +72,36 @@
             </table>
         </div>
         <div class="container" id="button">
-            <button class="btn" th:onclick="saveWish([[${findById.id}]], [[${session.login.id}]])">찜목록 담기</button>
-<!--            <form action="/wish/list" method="post" name="wishList">-->
-<!--                <input type="hidden" th:value="${findById}">-->
-<!--                <input type="submit" class="btn" value="찜목록 담기">-->
-<!--            </form>-->
-<!--            <button class="btn">찜목록 담기</button>-->
+            <input type="hidden" th:value="${findById.id}" id="resultItem">
+            <input type="hidden" th:value="${session.login.id}" id="resultUser">
+            <button class="btn" onclick="saveWish()">찜목록 담기</button>
             <button class="btn">구매하기</button>
         </div>
     </div>
 </div>
 </body>
 <script th:inline="javascript">
-    function saveWish(saleId, userId) {
+    function saveWish() {
         $.ajax({
-            type: "post",
-            url: "/wish/list",
-            data: {
-                saleId : saleId,
-                userId : userId
+            type : "post",
+            url : "/wish/list",
+            dataType : "text",
+            data : {
+                saleId : document.getElementById("resultItem").value,
+                userId : document.getElementById("resultUser").value
             },
-            dataType: "json",
-            success: function (data) {
-                if (data) {
-                    alert("찜목록에 추가 되었습니다.");
-                    location.reload();
-                } else {
-                    alert("이미 찜목록에 추가되어 있습니다.");
+            success : function (data) {
+                if (data == 1) {
+                alert("찜목록에 추가 되었습니다.");
+                location.reload();
+                } else if (data == 2) {
+                    alert("이미 찜목록에 추가되어 있습니다.")
                 }
             },
-            error: function () {
-                alert("힝");
+            error : function () {
+                alert("에러");
             }
         });
     }
-
 </script>
 </html>
