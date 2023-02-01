@@ -53,16 +53,29 @@ public class UserController {
     @PostMapping("/user/login")
     public String userLogin(@ModelAttribute UserDTO userDTO,
                             HttpSession session,
-                            Model model) {
+                            Model model,
+                            @RequestParam(value = "redirectURL", defaultValue = "/") String redirectURL) {
         UserDTO result = userService.login(userDTO);
 
-        if (result != null) {
+        if (result != null && !result.getUserName().equals("admin")) {
             session.setAttribute("login", result);
             model.addAttribute("login", result);
-            return "redirect:/";
+            return "redirect:" + redirectURL;
+        } else if (result.getUserName().equals("admin")) {
+            session.setAttribute("login", result);
+            model.addAttribute("login", result);
+            return "admin_index";
         } else {
-            return "User/user_login";
+            return "index";
         }
+
+//        if (result != null) {
+//            session.setAttribute("login", result);
+//            model.addAttribute("login", result);
+//            return "redirect:/";
+//        } else {
+//            return "User/user_login";
+//        }
     }
 
     @GetMapping("/user/logout")
