@@ -8,10 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,8 +41,6 @@ public class SaleController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        System.out.println("endPage = " + endPage);
-        System.out.println("startPage = " + startPage);
 //        List<SaleDTO> saleDTOList = saleService.findAll();
 //        model.addAttribute("itemList", saleDTOList);
 

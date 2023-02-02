@@ -98,7 +98,7 @@
     <div class="container" id="total2">
         <div id="three">
             <form action="/search" role="search" method="get" id="sForm">
-                <input type="search" name="keyword">
+                <input type="search" name="keyword" th:value="${keyword}">
                 <button class="btn" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>

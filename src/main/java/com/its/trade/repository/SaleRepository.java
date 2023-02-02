@@ -1,6 +1,8 @@
 package com.its.trade.repository;
 
 import com.its.trade.entity.SaleEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,5 +22,8 @@ public interface SaleRepository extends JpaRepository<SaleEntity, Long> {
 
     List<SaleEntity> findBySubCategory(String sub, Sort id);
 
-    List<SaleEntity> findByItemNameContainingOrSellerNameContainingOrderByIdDesc(String itemName, String sellerName, Sort id);
+    Page<SaleEntity> findByItemNameContainingOrSellerNameContainingOrderByIdDesc(String itemName, String sellerName, PageRequest id);
+
+//    List<SaleEntity> findByItemNameContainingOrSellerNameContainingOrderByIdDesc(String itemName, String sellerName, Sort id);
+
 }

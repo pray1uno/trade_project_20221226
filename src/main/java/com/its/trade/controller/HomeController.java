@@ -3,6 +3,9 @@ package com.its.trade.controller;
 import com.its.trade.DTO.SaleDTO;
 import com.its.trade.service.SaleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -146,11 +149,30 @@ public class HomeController {
         return "Accessory/accessory_belt";
     }
 
+//    @GetMapping("/search")
+//    public String search(@RequestParam("keyword") String keyword,
+//                         Model model) {
+//        List<SaleDTO> saleDTOList = saleService.search(keyword);
+//        model.addAttribute("search", saleDTOList);
+//        return "search_index";
+//    }
+
     @GetMapping("/search")
     public String search(@RequestParam("keyword") String keyword,
+                         @PageableDefault(page = 1) Pageable pageable,
                          Model model) {
-        List<SaleDTO> saleDTOList = saleService.search(keyword);
-        model.addAttribute("search", saleDTOList);
+        Page<SaleDTO> searchList = saleService.search(keyword, pageable);
+        model.addAttribute("paging", searchList);
+
+        model.addAttribute("keyword", keyword);
+
+        int blockLimit = 5;
+        int startPage = (((int) (Math.ceil((double) pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = ((startPage + blockLimit - 1) < searchList.getTotalPages()) ? startPage + blockLimit - 1 : searchList.getTotalPages();
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         return "search_index";
     }
 }

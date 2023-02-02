@@ -319,16 +319,40 @@ public class SaleService {
     }
 
     @Transactional
-    public List<SaleDTO> search(String keyword) {
-        List<SaleDTO> saleDTOList = new ArrayList<>();
-        List<SaleEntity> saleEntityList = null;
+    public Page<SaleDTO> search(String keyword, Pageable pageable) {
+        int page = pageable.getPageNumber();
+        page = (page == 1) ? 0 : (page -1);
+        final int pageLimit = 5;
 
-        saleEntityList = saleRepository.findByItemNameContainingOrSellerNameContainingOrderByIdDesc(keyword,keyword,Sort.by(Sort.Direction.DESC, "id"));
+        Page<SaleEntity> searchEntity = null;
 
-        for (SaleEntity saleEntity : saleEntityList) {
-            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
-        }
-            return saleDTOList;
+        searchEntity = saleRepository.findByItemNameContainingOrSellerNameContainingOrderByIdDesc(keyword, keyword, PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+
+        Page<SaleDTO> saleDTOPage = searchEntity.map(
+                search -> new SaleDTO(search.getId(),
+                        search.getItemCategory(),
+                        search.getSubCategory(),
+                        search.getItemName(),
+                        search.getItemPrice(),
+                        search.getItemCount(),
+                        search.getSellerName(),
+                        search.getItemHits(),
+                        search.getCreatedTime(),
+                        search.getSaleFileEntityList()
+                )
+        );
+
+        return saleDTOPage;
+
+//        List<SaleDTO> saleDTOList = new ArrayList<>();
+//        List<SaleEntity> saleEntityList = null;
+//
+//        saleEntityList = saleRepository.findByItemNameContainingOrSellerNameContainingOrderByIdDesc(keyword,keyword,Sort.by(Sort.Direction.DESC, "id"));
+//
+//        for (SaleEntity saleEntity : saleEntityList) {
+//            saleDTOList.add(SaleDTO.toSaleDTO(saleEntity));
+//        }
+//            return saleDTOList;
     }
 
     @Transactional
