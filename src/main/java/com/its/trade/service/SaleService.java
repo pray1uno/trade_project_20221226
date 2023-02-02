@@ -6,6 +6,9 @@ import com.its.trade.entity.SaleFileEntity;
 import com.its.trade.repository.SaleFileRepository;
 import com.its.trade.repository.SaleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -328,4 +331,25 @@ public class SaleService {
             return saleDTOList;
     }
 
+    @Transactional
+    public Page<SaleDTO> paging(Pageable pageable) {
+        int page = pageable.getPageNumber() -1;
+        final int pageLimit = 5;
+
+        Page<SaleEntity> saleEntityPage = saleRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC,"id")));
+        Page<SaleDTO> saleDTO = saleEntityPage.map(
+                sale -> new SaleDTO(sale.getId(),
+                        sale.getItemCategory(),
+                        sale.getSubCategory(),
+                        sale.getItemName(),
+                        sale.getItemPrice(),
+                        sale.getItemCount(),
+                        sale.getSellerName(),
+                        sale.getItemHits(),
+                        sale.getCreatedTime(),
+                        sale.getSaleFileEntityList()
+                )
+        );
+        return saleDTO;
+    }
 }

@@ -6,22 +6,6 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jquery.js}"></script>
     <style>
-        /*#item_list {*/
-        /*    display: flex;*/
-        /*    flex-wrap: wrap;*/
-        /*    justify-content: center;*/
-        /*}*/
-
-        /*.item_card {*/
-        /*    width: 250px;*/
-        /*    height: 430px;*/
-        /*    background-color: gray;*/
-        /*    margin-right: 25px;*/
-        /*    margin-bottom: 30px;*/
-        /*    border: solid 1px black;*/
-        /*    text-align: center;*/
-        /*}*/
-
         #span {
             text-align: center;
             margin-top: 40px;
@@ -53,14 +37,14 @@
             <th>조회수</th>
             <th>등록시간</th>
         </tr>
-        <tr th:each="item : ${itemList}">
+        <tr th:each="item : ${paging}">
             <td th:text="${item.id}"></td>
-            <td th:if="${item.storedFileName == null}">
+            <td th:if="${item.thumbnail == null}">
                 <a th:href="@{|/item/${item.id}|}">
                     <img src="/img/noimg.gif" width="100px" height="100px">
                 </a>
             </td>
-            <td th:each="fileName : ${item.storedFileName}">
+            <td th:each="fileName : ${item.thumbnail}">
                 <a th:href="@{|/item/${item.id}|}">
                     <img th:src="@{|/upload/${fileName}}" width="100px" height="100px">
                 </a>
@@ -75,6 +59,39 @@
             <td th:text="*{#temporals.format(item.itemCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
+</div>
+
+<div class="container">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" th:href="@{/(page=1)}">
+                <span> ◀ </span>
+            </a>
+        </li>
+
+        <li th:class="${paging.first} ? 'disabled'" class="page-item">
+            <a class="page-link" th:href="${paging.first} ? '#' : @{/(page=${paging.number})}">
+                <span> ＜ </span>
+            </a>
+        </li>
+
+        <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+            th:class="${page == paging.number + 1} ? 'page-item active'" class="page-item">
+            <a class="page-link" th:text="${page}" th:href="@{/(page=${page})}"></a>
+        </li>
+
+        <li th:class="${paging.last} ? 'disabled'">
+            <a class="page-link" th:href="${paging.last} ? '#' : @{/(page=${paging.number +2})}">
+                <span> ＞ </span>
+            </a>
+        </li>
+
+        <li th:class="page-item">
+            <a class="page-link" th:href="@{/(page=${paging.totalPages})}">
+                <span> ▶ </span>
+            </a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

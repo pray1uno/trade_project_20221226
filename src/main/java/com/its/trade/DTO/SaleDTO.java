@@ -30,6 +30,29 @@ public class SaleDTO {
     private List<MultipartFile> saleFile;
     private List<String> originalFileName;
     private List<String> storedFileName;
+    private String thumbnail;
+
+    public SaleDTO() {
+
+    }
+
+    public SaleDTO(Long id, String itemCategory, String subCategory, String itemName, String itemPrice, int itemCount, String sellerName, int itemHits, LocalDateTime itemCreatedTime, List<SaleFileEntity> storedFileName) {
+        this.id = id;
+        this.itemCategory = itemCategory;
+        this.subCategory = subCategory;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemCount = itemCount;
+        this.sellerName = sellerName;
+        this.itemHits = itemHits;
+        this.itemCreatedTime = itemCreatedTime;
+//        this.storedFileName = storedFileName;
+
+        for (int i=0; i < storedFileName.size(); i++) {
+            String th = storedFileName.get(i).getStoredFileName();
+            this.thumbnail = th;
+        }
+    }
 
     public static SaleDTO toSaleDTO(SaleEntity saleEntity) {
         SaleDTO saleDTO = new SaleDTO();
